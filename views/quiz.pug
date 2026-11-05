@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Variables and Data Types
+    link(rel="stylesheet" href="/css/quiz.css")
+  body
+    img.background(src="/background.jpeg" alt="background")
+
+    .page-wrap
+      .topbar
+        a.username(href="/home") HOME
+        a.username(href="/profile")= username
+        a(href="/profile")
+          img.avatar(src="/profile.png" alt="profile")
+
+      h1.page-title Variables and Data Types
+
+      .content-row
+        .quiz-card
+          if question
+            form(action="/quiz/submit" method="POST")
+              p.question-label QUESTION: #{question.text}
+              input(type="hidden" name="questionID" value=question.id)
+              input(type="hidden" name="segmentID" value=question.segmentID)
+              if question.type === 'fill'
+                input.fill-input(type="text" name="answer" placeholder="Type your answer" required autocomplete="off")
+              else 
+                each option, index in question.options
+                  label.option-row
+                    input(type="radio" name="answer" value=String.fromCharCode(65 + index) required)
+                    span.radio-fake
+                    span.option-text= option.text
+              button.submit-btn(type="submit") SUBMIT
+              p= result
+        .score-card
+          p.score-label SCORES:
+          p.score-value= score
+    if finished
+      .modal-overlay
+        .modal-box
+          h2 Segment Completed!
+          p You have answered all the questions in this segment.
+          p Your score: #{score}
+          .modal-buttons
+            a.modal-btn(href="/home") Back to Home
+            a.modal-btn.primary(href="/home") Spin Again

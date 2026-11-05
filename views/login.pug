@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Login
+    link(rel="stylesheet" href="/css/login.css")
+  body
+    img.background(src="background.jpeg" alt="background")
+    .login-container
+      .login-card
+        .form-side
+          h1 Hello Again!
+          form(action="/login" method="POST")
+            input.input-field(type="text" name="username" placeholder="Username")
+            input.input-field(type="password" name="password" placeholder="Password")
+            a.forgot-link(href="/forgotpassword") Forgot Password
+            a.signup-link(href="/signup") Don't have an account? Sign Up
+            button.signin-btn(type="submit") Sign In
+            if errorMessage
+              p.error= errorMessage
+        .image-side
+          img(src="sideimage.jpg" alt="background")
+        

@@ -1,0 +1,24 @@
+doctype html
+
+html
+    head
+        title profile
+        link(rel="stylesheet" href="/css/profile.css")
+    body
+        img.background(src="background.jpeg" alt="background")
+
+        .page-wrap
+            .topbar
+                a.username(href="/home") HOME
+                a.username(href="/profile")= username
+                a(href="/profile")
+                    img.avatar(src="profile.png" alt="profile")
+            .profilecontent
+                img.profile(src="profile.png" alt="profile")
+                p.content= username
+
+                .form
+                    a.button(href="/scores") Check Total Scores 
+                    a.button(href="/resetpassword") Change Password 
+                    form(action="/logout" method="POST")
+                        button.button(type="submit") Log Out

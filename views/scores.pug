@@ -1,0 +1,18 @@
+doctype html
+html
+    head
+        title scores
+        link(rel="stylesheet" href="/css/scores.css")
+    body
+        img.background(src="background.jpeg" alt="background")
+
+        .page-wrap
+            .topbar
+                a.username(href="/home") HOME
+                a.username(href="/profile")= username
+                a(href="/profile")
+                    img.avatar(src="profile.png" alt="profile")
+            .form
+                h1 Score: 
+                p.font=score
+            

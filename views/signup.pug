@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title Sign Up
+    link(rel="stylesheet" href="/css/signup.css")
+  body
+    img.background(src="background.jpeg" alt="background")
+    .login-container
+      .login-card
+        .form-side
+          h1 Create Account!
+          form(action="/signup" method="POST")
+            input.input-field(type="text" name="username" placeholder="Username")
+            input.input-field(type="password" name="password" placeholder="Password")
+            input.input-field(type="password" name="confirmpassword" placeholder="Confirm Password")
+            button.signup-btn(type="submit") Sign Up
+            a.link(href="/login") Already have an account? Login
+            if errorMessage
+              p.error= errorMessage
+        .image-side
+          img(src="sideimage.jpg" alt="background")
+        

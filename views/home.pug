@@ -1,0 +1,66 @@
+doctype html
+html
+  head
+    title Home
+    link(rel="stylesheet" href="/css/home.css")
+  body
+    img.background(src="/background.jpeg" alt="background")
+
+    .page-wrap
+      .topbar
+        a.username(href="/home") HOME
+        a.username(href="/profile")= username
+        a(href="/profile")
+          img.avatar(src="/profile.png" alt="profile")
+
+      h1.page-title Welcome back, #{username}!
+
+      .home-grid
+        .home-card
+          h2 Your Progress
+          each seg in progress
+            .seg-row
+              span Segment #{seg.segmentID}
+              .bar
+                .bar-fill(style="width:" + seg.percent + "%")
+              span #{seg.done}/#{seg.total}
+          button.home-btn(type="button" onclick="openModal()") Continue Quiz
+
+        .home-card
+          h2 Leaderboard
+          ol
+            each p in leaderboard
+              li #{p.Username} — #{p.total}
+
+      .home-card
+        h2 How to Play
+        ol
+          li Spin the physical roulette wheel
+          li Scan the QR code on the board
+          li Answer the question here
+          li Earn points and climb the leaderboard
+    
+    #segment-modal.modal-overlay
+        .modal-box
+            h2 Which segment did you land on?
+            p Pick the segment shown on the roulette wheel.
+
+            .segment-list
+            each seg in progress
+                if seg.done >= seg.total
+                    span.segment-link.disabled Segment #{seg.segmentID} ✔ Completed
+                else
+                    a.segment-link(href="/quiz/segment/" + seg.segmentID)
+                        | Segment #{seg.segmentID}
+                        span.segment-count #{seg.done}/#{seg.total}
+
+            button.modal-close(type="button" onclick="closeModal()") Cancel
+
+    script.
+        const modal = document.getElementById('segment-modal');
+        function openModal()  { modal.classList.add('show'); }
+        function closeModal() { modal.classList.remove('show'); }
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
